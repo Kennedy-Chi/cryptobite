@@ -308,6 +308,12 @@ html.w-mod-touch * {
   display: none;
 }
 
+.w-button {
+  color: #fff;
+  line-height: inherit;
+  cursor: pointer;
+}
+
 input.w-button {
   -webkit-appearance: button;
 }
@@ -2216,7 +2222,7 @@ textarea.w-select {
 .side-dash-board {
   width: 200px;
   min-width: 200px;
-  background-color: #181320;
+  background-color: #222;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -2295,7 +2301,7 @@ textarea.w-select {
 }
 
 .down-logo-texts {
-  color: #00ebf3;
+  color: #ffb426;
   text-align: left;
   font-family: Montserrat, sans-serif;
   font-size: 16px;
@@ -2306,7 +2312,7 @@ textarea.w-select {
 }
 
 .table-top-holder {
-  background-color: #00ebf3;
+  background-color: #ffb426;
   justify-content: space-between;
   margin-bottom: 20px;
   padding: 5px 10px;
@@ -2347,7 +2353,7 @@ textarea.w-select {
 .icon-holder {
   width: 50px;
   height: 50px;
-  background-color: #181320;
+  background-color: #222;
   border-radius: 5px;
   justify-content: center;
   display: flex;
@@ -2357,7 +2363,7 @@ textarea.w-select {
   width: 50px;
   height: 50px;
   cursor: pointer;
-  background-color: #181320;
+  background-color: #222;
   justify-content: center;
   align-items: center;
   margin-right: 10px;
@@ -2381,7 +2387,7 @@ textarea.w-select {
 
 .top-card-two {
   width: 48%;
-  background-image: url("https://uploads-ssl.webflow.com/64300ab9bc516802715bbe1b/6460c15cee128df0898348d0_card-banner.svg");
+  background-image: url("https://uploads-ssl.webflow.com/64300ab9bc516802715bbe1b/646425bfddc7e3d1b4305f24_card-banner.svg");
   background-position: 50%;
   background-size: cover;
   border-radius: 20px;
@@ -2430,7 +2436,7 @@ textarea.w-select {
 }
 
 .each-button-flexer.active {
-  background-color: #00ebf3;
+  background-color: #ffb426;
   border-radius: 3px;
 }
 
@@ -2466,11 +2472,12 @@ textarea.w-select {
   width: 100px;
 }
 
-.top-header {
+.top-header.dash {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 16px;
   font-weight: 500;
+  background: transparent;
 }
 
 .top-text {
@@ -2547,7 +2554,7 @@ textarea.w-select {
 
 .transact-button {
   color: #232323;
-  background-color: #00ebf3;
+  background-color: #ffb426;
   border-radius: 5px;
   margin-right: 20px;
 }
@@ -2567,7 +2574,7 @@ textarea.w-select {
 
 .each-short-card {
   width: 24%;
-  background-color: #181320;
+  background-color: #222;
   border-radius: 5px;
   padding: 10px;
 }
@@ -2582,7 +2589,7 @@ textarea.w-select {
 }
 
 .main-header {
-  color: #00ebf3;
+  color: #ffb426;
   margin-top: 0;
   margin-bottom: 0;
   font-size: 15px;
@@ -2591,7 +2598,7 @@ textarea.w-select {
 }
 
 .main-header.light {
-  color: #00ebf3;
+  color: #ffb426;
 }
 
 .main-header.total {
@@ -2661,7 +2668,7 @@ textarea.w-select {
   width: 22px;
   height: 22px;
   cursor: pointer;
-  background-color: #00ebf3;
+  background-color: #ffb426;
   border-radius: 5px;
   justify-content: center;
   display: flex;
@@ -2673,7 +2680,7 @@ textarea.w-select {
 
 .details-two {
   width: 35%;
-  background-color: #181320;
+  background-color: #222;
   border-radius: 5px;
   padding: 20px 10px;
 }
@@ -2686,14 +2693,14 @@ textarea.w-select {
 
 .each-day {
   width: 48%;
-  background-color: #cc1583;
+  background-color: #7a7a7a;
   border: 1px #d0cfcf;
   border-radius: 5px;
   box-shadow: 2px 2px 20px 2px rgba(0, 0, 0, 0.2);
 }
 
 .each-day.active {
-  background-color: #00ebf3;
+  background-color: #ffb426;
 }
 
 .day-top-holder {
@@ -2794,7 +2801,7 @@ textarea.w-select {
   margin-bottom: 20px;
 }
 
-.main-heading {
+.main-heading.dash {
   margin-top: 0;
   margin-bottom: 0;
   font-family: Montserrat, sans-serif;
@@ -2825,31 +2832,33 @@ textarea.w-select {
   margin-bottom: 40px;
 }
 
-.plan-header-holder {
+.plan-header-holder.dash {
   width: 250px;
-  background-color: #00ebf3;
+  background-color: #ffb426;
   border-radius: 5px;
   margin-bottom: 20px;
   padding: 5px 10px;
+  display: block;
 }
 
-.plan-card-holder {
+.plan-card-holder.dash {
+  padding-top: 20px;
   flex-wrap: wrap;
   justify-content: space-between;
   display: flex;
 }
 
-.each-plan-card {
+.each-plan-card.dash {
   width: 31%;
-  background-color: #181320;
+  background-color: #222;
   border-radius: 5px;
   margin-bottom: 20px;
   padding: 10px 10px 10px 20px;
   font-weight: 400;
 }
 
-.each-plan-card.active {
-  background-color: #229ea3;
+.each-plan-card.dash.active {
+  background-color: rgba(255, 180, 38, 0.86);
 }
 
 .plan-heading-holder {
@@ -2873,7 +2882,7 @@ textarea.w-select {
 }
 
 .plan-heading.sm {
-  color: #00ebf3;
+  color: #ffb426;
 }
 
 .select-payment {
@@ -2892,7 +2901,7 @@ textarea.w-select {
 
 .each-payment-type {
   width: 48%;
-  background-color: #181320;
+  background-color: #222;
   border-radius: 5px;
   padding: 10px;
 }
@@ -2914,7 +2923,7 @@ textarea.w-select {
 }
 
 .each-payment-method.active {
-  border-color: #00ebf3;
+  border-color: #ffb426;
 }
 
 .each-payment-method.disable {
@@ -2929,7 +2938,7 @@ textarea.w-select {
 }
 
 .pay-header {
-  color: #00ebf3;
+  color: #ffb426;
   margin-top: 0;
   margin-bottom: 0;
   font-size: 18px;
@@ -2980,7 +2989,7 @@ textarea.w-select {
 
 .button {
   color: #232323;
-  background-color: #00ebf3;
+  background-color: #ffb426;
   border-radius: 5px;
   font-weight: 500;
 }
@@ -2997,7 +3006,7 @@ textarea.w-select {
 
 .each-daily-holder {
   width: 32%;
-  background-color: #181320;
+  background-color: #222;
   border-radius: 5px;
   flex-direction: column;
   justify-content: center;
@@ -3016,7 +3025,7 @@ textarea.w-select {
 }
 
 .erro-text {
-  color: #00ebf3;
+  color: #ffb426;
   font-size: 16px;
   font-weight: 300;
 }
@@ -3032,7 +3041,7 @@ textarea.w-select {
 }
 
 .footer {
-  background-color: #181320;
+  background-color: #222;
   justify-content: center;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -3100,7 +3109,7 @@ textarea.w-select {
 }
 
 .upload-address-holder {
-  background-color: #00ebf3;
+  background-color: #ffb426;
   border-radius: 20px;
   flex-direction: row;
   align-items: stretch;
@@ -3132,7 +3141,7 @@ textarea.w-select {
 
 .table {
   width: 100%;
-  background-color: #181320;
+  background-color: #222;
   border-radius: 5px;
   padding: 20px;
 }
@@ -3145,7 +3154,7 @@ textarea.w-select {
 }
 
 .light-table-holder.table-green {
-  background-color: #00ebf3;
+  background-color: #ffb426;
 }
 
 .sn-holder {
@@ -3264,8 +3273,8 @@ textarea.w-select {
 }
 
 .each-other-card {
-  width: 23%;
-  background-color: #181320;
+  width: 32%;
+  background-color: #222;
   border-radius: 5px;
   padding: 20px;
 }
@@ -3312,7 +3321,7 @@ textarea.w-select {
 
 .account-buttom-cover {
   width: 100%;
-  background-color: #181320;
+  background-color: #222;
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 5px 10px;
@@ -3376,7 +3385,7 @@ textarea.w-select {
   width: 100%;
   height: 40px;
   color: #fff;
-  background-color: #181320;
+  background-color: #222;
   border: 0 solid #000;
   border-radius: 3px;
   margin-bottom: 0;
@@ -3461,13 +3470,17 @@ textarea.w-select {
 
 .green-button {
   color: #232323;
-  background-color: #00ebf3;
+  background-color: #ffb426;
   border-radius: 5px;
-  padding-top: 13px;
-  padding-bottom: 13px;
+  padding: 13px 15px;
   font-family: Montserrat, sans-serif;
   font-size: 15px;
   font-weight: 500;
+  display: flex;
+}
+
+.green-button.pad {
+  margin-right: 10px;
 }
 
 .ehereum {
@@ -3497,7 +3510,7 @@ textarea.w-select {
 
 .deposit-button-top {
   width: 250px;
-  background-color: #00ebf3;
+  background-color: #ffb426;
   border-radius: 5px;
   margin-bottom: 20px;
   padding: 10px;
@@ -3525,7 +3538,7 @@ textarea.w-select {
 }
 
 .deposit-middle-table {
-  background-color: #00ebf3;
+  background-color: #ffb426;
   margin-bottom: 10px;
   padding: 10px;
   display: flex;
@@ -3550,7 +3563,7 @@ textarea.w-select {
 }
 
 .history-top-card {
-  background-color: #181320;
+  background-color: #222;
   border-radius: 5px;
   margin-bottom: 20px;
   padding: 20px;
@@ -3583,6 +3596,12 @@ textarea.w-select {
   display: flex;
 }
 
+.sticky-navigation {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
 .image-37 {
   width: 25px;
   display: none;
@@ -3612,8 +3631,8 @@ textarea.w-select {
 }
 
 .nav-links.active {
-  color: #00ebf3;
-  border: 1px solid #00ebf3;
+  color: #ffb426;
+  border: 1px solid #ffb426;
 }
 
 .top-profile-pics {
@@ -3628,8 +3647,8 @@ textarea.w-select {
 
 .dashboard-footer {
   width: 100%;
-  color: #00ebf3;
-  background-color: #181320;
+  color: #ffb426;
+  background-color: #222;
   justify-content: center;
   align-items: center;
   padding: 27px;
@@ -3646,7 +3665,7 @@ textarea.w-select {
 .picture-holder {
   width: 70px;
   height: 70px;
-  background-image: url("../images/avatar.svg");
+  background-image: url("https://uploads-ssl.webflow.com/64300ab9bc516802715bbe1b/6460c2a375a21d411d0e7754_image%2014.svg");
   background-position: 50%;
   background-size: cover;
   border-radius: 50%;
@@ -3659,7 +3678,7 @@ textarea.w-select {
 }
 
 .edit-img {
-  width: 20px;
+  width: 25px;
   position: absolute;
   top: auto;
   bottom: -10%;
@@ -3708,9 +3727,9 @@ textarea.w-select {
 .each-page {
   width: 30px;
   height: 30px;
-  color: #00ebf3;
+  color: #ffb426;
   cursor: pointer;
-  border: 1px solid #00ebf3;
+  border: 1px solid #ffb426;
   justify-content: center;
   align-items: center;
   margin-right: 5px;
@@ -3720,7 +3739,7 @@ textarea.w-select {
 
 .each-page.active {
   color: #232323;
-  background-color: #00ebf3;
+  background-color: #ffb426;
 }
 
 .paginate-icon {
@@ -3737,6 +3756,21 @@ textarea.w-select {
 
 .rate-input {
   width: 100px;
+}
+
+.spinner {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.button-texts {
+  margin-right: 0;
+}
+
+.page-number,
+.text-block,
+.text-block-2 {
+  color: #fff;
 }
 
 @media screen and (min-width: 1280px) {
@@ -3778,7 +3812,7 @@ textarea.w-select {
     padding-right: 10px;
   }
 
-  .each-plan-card {
+  .each-plan-card.dash {
     width: 21%;
     cursor: pointer;
   }
@@ -3787,6 +3821,12 @@ textarea.w-select {
   .withdrawal-funds,
   .change-password-holder {
     display: block;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .dashboard-holder {
+    max-width: none;
   }
 }
 
@@ -3817,7 +3857,7 @@ textarea.w-select {
     width: 60%;
   }
 
-  .each-plan-card {
+  .each-plan-card.dash {
     width: 48%;
   }
 
@@ -3881,11 +3921,6 @@ textarea.w-select {
     left: -500px;
   }
 
-  .side-dash-board.show {
-    left: 0px;
-    transition: all 0.3s;
-  }
-
   .main-dash-board {
     padding-left: 10px;
     padding-right: 10px;
@@ -3905,10 +3940,6 @@ textarea.w-select {
     margin-bottom: 20px;
     margin-right: 0;
     display: flex;
-  }
-
-  .circle-bg {
-    width: 100%;
   }
 
   .icon-profile-holder {
@@ -4057,7 +4088,7 @@ textarea.w-select {
   .table-header.slash {
     width: 100px;
     min-width: 100px;
-    color: #00ebf3;
+    color: #ffb426;
     margin-right: 10px;
     display: block;
   }
@@ -4066,7 +4097,7 @@ textarea.w-select {
     flex-direction: column;
   }
 
-  .each-plan-card {
+  .each-plan-card.dash {
     width: 100%;
   }
 
