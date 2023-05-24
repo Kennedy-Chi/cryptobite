@@ -309,7 +309,6 @@ html.w-mod-touch * {
 }
 
 .w-button {
-  color: #fff;
   line-height: inherit;
   cursor: pointer;
 }
@@ -2238,6 +2237,7 @@ textarea.w-select {
   flex-direction: column;
   padding: 30px 20px;
   display: flex;
+  min-height: 90vh;
 }
 
 .board-logo-holder {
@@ -3476,7 +3476,7 @@ textarea.w-select {
   font-family: Montserrat, sans-serif;
   font-size: 15px;
   font-weight: 500;
-  display: flex;
+  /* display: flex; */
 }
 
 .green-button.pad {
@@ -3919,6 +3919,11 @@ textarea.w-select {
     position: fixed;
     top: 0;
     left: -500px;
+    transition: all 0.3s;
+  }
+
+  .side-dash-board.show {
+    left: 0px;
   }
 
   .main-dash-board {
@@ -3940,6 +3945,7 @@ textarea.w-select {
     margin-bottom: 20px;
     margin-right: 0;
     display: flex;
+    flex-wrap: wrap;
   }
 
   .icon-profile-holder {
@@ -4245,5 +4251,24 @@ textarea.w-select {
   .time,
   .note-text {
     padding-left: 0;
+  }
+}
+
+.custom-btn.processing {
+  display: flex;
+  align-items: center;
+}
+
+.processing-icon {
+  animation: spin 1s linear infinite;
+  height: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

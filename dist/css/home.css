@@ -558,7 +558,6 @@ label {
   vertical-align: middle;
   background-color: #fff;
   border: 1px solid #ccc;
-  margin-bottom: 10px;
   padding: 8px 12px;
   font-size: 14px;
   line-height: 1.42857;
@@ -3020,9 +3019,15 @@ textarea.w-select {
   display: flex;
 }
 
+.custom-btn {
+  background-color: #ffb426;
+  border-radius: 5px;
+  padding: 13px 15px;
+  color: #232323;
+}
+
 .text-field {
   width: 255px;
-  height: 8vh;
   background-color: #252525;
   border: 2px solid #333;
   border-radius: 100px;
@@ -3540,7 +3545,6 @@ textarea.w-select {
 }
 
 .text-field-2 {
-  width: 50%;
 }
 
 .text-field-2.left {
