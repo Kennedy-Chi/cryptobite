@@ -235,15 +235,12 @@ th {
 }
 
 .w-icon-slider-right:before {
-  content: "î˜€";
 }
 
 .w-icon-slider-left:before {
-  content: "î˜";
 }
 
 .w-icon-nav-menu:before {
-  content: "î˜‚";
 }
 
 .w-icon-arrow-down:before,
@@ -2278,11 +2275,7 @@ textarea.w-select {
 }
 
 .brand-img {
-  height: 100%;
-}
-
-.brand {
-  height: 45px;
+  width: 100%;
 }
 
 .nav-flex {
