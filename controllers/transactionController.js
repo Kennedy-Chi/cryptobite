@@ -439,10 +439,9 @@ const finishInterruptedActiveDeposit = async (
 };
 
 exports.approveDeposit = catchAsync(async (req, res, next) => {
-  req.body.status = true;
-
+  req.body;
+  await Transaction.findByIdAndUpdate(req.params.id, { status: true });
   startRunningDeposit(req.body, req.params.id, "edit", next);
-
   next();
 });
 
@@ -668,8 +667,6 @@ const startRunningDeposit = async (data, id, next) => {
 
   if (id == "") {
     await Transaction.create(data);
-  } else {
-    await Transaction.findByIdAndUpdate(id, { status: true });
   }
 
   const earning = Number((data.amount * data.percent) / 100).toFixed(2);
