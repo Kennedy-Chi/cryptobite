@@ -170,44 +170,7 @@ exports.signup = catchAsync(async (req, res, next) => {
       const user = await User.create(data);
 
       if (signup.email) {
-        const email = await Email.findOne({
-          template: "confirm-registration",
-        });
-        const company = await Company.findOne();
-
-        const content = email.content
-          .replace("{{company-name}}", company.companyName)
-          .replace("{{fullName}}", `${user.firstName} ${user.lastName}`);
-
-        const companyInfo = {
-          email: company.systemEmail,
-          username: user.username,
-        };
-
-        const resetURL = `${company.companyDomain}/confirm-registration?token=${user._id}`;
-        const banner = `${company.companyDomain}/uploads/${email.banner}`;
-
-        const users = [companyInfo, user];
-
-        users.forEach((user) => {
-          try {
-            new SendEmail(
-              company,
-              user,
-              email,
-              banner,
-              content,
-              resetURL
-            ).sendEmail();
-          } catch (err) {
-            return next(
-              new AppError(
-                `There was an error sending the email. Try again later!, ${err}`,
-                500
-              )
-            );
-          }
-        });
+        prepareEmail(user, "confirm-registration");
 
         createSendToken(
           user,
@@ -217,13 +180,9 @@ exports.signup = catchAsync(async (req, res, next) => {
           "Activate your account by verifying the email sent to you"
         );
       } else {
-        createSendToken(
-          user,
-          201,
-          res,
-          "clear",
-          "Congrats, you have successfully signed up, kindly login to continue."
-        );
+        const msg =
+          "Congrats, you have successfully signed up, kindly login to continue.";
+        createUserRecords(user, res, msg);
       }
     }
   }
@@ -457,87 +416,8 @@ exports.activateAUser = catchAsync(async (req, res, next) => {
     );
   }
 
-  const user = await User.findByIdAndUpdate(oldUser._id, {
-    suspension: false,
-    status: "User",
-  });
-
-  await Comment.create({
-    username: user.username,
-    country: user.country,
-    flag: user.countryFlag,
-    profilePicture: user.profilePicture,
-    commented: false,
-  });
-
-  const referral = await User.findOne({ username: user.referredBy });
-  if (referral != null || referral != undefined) {
-    const form = {
-      username: user.username,
-      regDate: user.regDate,
-    };
-
-    referral.referrals.push(form);
-    await User.findByIdAndUpdate(referral._id, {
-      referrals: referral.referrals,
-      hasReferred: true,
-    });
-
-    await Referral.create({
-      username: referral.username,
-      referralUsername: user.username,
-      regDate: user.regDate,
-    });
-  }
-
-  const email = await Email.findOne({
-    template: "registration-successful",
-  });
-  const company = await Company.findOne();
-
-  const content = email.content
-    .replace("{{company-name}}", company.companyName)
-    .replace("{{fullName}}", `${user.fullName}`);
-  const companyInfo = {
-    email: company.systemEmail,
-    username: user.username,
-  };
-
-  const resetURL = `${company.companyDomain}`;
-  const banner = `${company.companyDomain}/uploads/${email.banner}`;
-
-  const users = [companyInfo, user];
-
-  users.forEach((user) => {
-    try {
-      new SendEmail(
-        company,
-        user,
-        email,
-        banner,
-        content,
-        resetURL
-      ).sendEmail();
-    } catch (err) {
-      return next(
-        new AppError(
-          `There was an error sending the email. Try again later!, ${err}`,
-          500
-        )
-      );
-    }
-  });
-
-  const form = {
-    username: user.username,
-    time: new Date().getTime(),
-    message: content,
-    subject: email.title,
-  };
-
-  await Notification.create(form);
-
-  createSendToken(user, 200, res);
+  const msg = "Your account has been activated, kindly login to continue";
+  createUserRecords(oldUser, res, msg);
 });
 
 function validateUser(
@@ -579,3 +459,94 @@ function validateUser(
   // All validations passed
   return true;
 }
+
+const createUserRecords = async (userData, res, msg) => {
+  const user = await User.findByIdAndUpdate(userData._id, {
+    suspension: false,
+    status: "User",
+  });
+
+  await Comment.create({
+    username: user.username,
+    country: user.country,
+    flag: user.countryFlag,
+    profilePicture: user.profilePicture,
+    commented: false,
+  });
+
+  const referral = await User.findOne({ username: user.referredBy });
+  if (referral != null || referral != undefined) {
+    const form = {
+      username: user.username,
+      regDate: user.regDate,
+    };
+
+    referral.referrals.push(form);
+    await User.findByIdAndUpdate(referral._id, {
+      referrals: referral.referrals,
+      hasReferred: true,
+    });
+
+    await Referral.create({
+      username: referral.username,
+      referralUsername: user.username,
+      regDate: user.regDate,
+    });
+
+    prepareEmail(referral, "referral-signup", user);
+  }
+
+  prepareEmail(user, "registration-successful", user);
+
+  createSendToken(user, 200, res, "User", msg);
+};
+
+const prepareEmail = async (user, template, secondUser) => {
+  const email = await Email.findOne({
+    template: template,
+  });
+  const company = await Company.findOne();
+
+  const content = email.content
+    .replace("{{company-name}}", company.companyName)
+    .replace("{{fullName}}", `${user.fullName}`)
+    .replace("{{username}}", `${secondUser.username}`);
+  const companyInfo = {
+    email: company.systemEmail,
+    username: user.username,
+  };
+
+  const resetURL = `${company.companyDomain}/confirm-registration?token=${user._id}`;
+  const banner = `${company.companyDomain}/uploads/${email.banner}`;
+
+  const users = [companyInfo, user];
+
+  users.forEach((user) => {
+    try {
+      new SendEmail(
+        company,
+        user,
+        email,
+        banner,
+        content,
+        resetURL
+      ).sendEmail();
+    } catch (err) {
+      return next(
+        new AppError(
+          `There was an error sending the email. Try again later!, ${err}`,
+          500
+        )
+      );
+    }
+  });
+
+  const form = {
+    username: user.username,
+    time: new Date().getTime(),
+    message: content,
+    subject: email.title,
+  };
+
+  await Notification.create(form);
+};
