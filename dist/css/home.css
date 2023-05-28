@@ -2840,9 +2840,15 @@ textarea.w-select {
   height: 15px;
 }
 
+.div-block-14 span {
+  margin-right: 5px;
+}
+
 .div-block-14 {
+  color: black;
+  align-items: center;
+  font-weight: 600;
   width: 40%;
-  justify-content: space-between;
   margin-left: 40px;
   padding-left: 0;
   display: flex;
