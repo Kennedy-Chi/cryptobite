@@ -3200,6 +3200,7 @@ textarea.w-select {
 .heading-21.faq {
   color: #fff;
   display: block;
+  line-height: 60px;
 }
 
 .heading-21.login {
@@ -3446,6 +3447,7 @@ textarea.w-select {
 
 .div-block-40 {
   width: 48%;
+  margin-bottom: 30px;
 }
 
 .div-block-41 {
@@ -3473,7 +3475,7 @@ textarea.w-select {
 .div-block-42 {
   width: 100%;
   border-bottom: 1px solid #e5e5e5;
-  margin-top: 60px;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
@@ -3481,6 +3483,7 @@ textarea.w-select {
   width: 100%;
   justify-content: space-between;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .heading-32 {
@@ -4065,11 +4068,6 @@ textarea.w-select {
 .card-button-holder {
   justify-content: center;
   display: flex;
-}
-
-.button {
-  background-color: #ffb426;
-  border-radius: 5px;
 }
 
 @media screen and (min-width: 1280px) {
