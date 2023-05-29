@@ -3523,7 +3523,7 @@ textarea.w-select {
 
 .contact-section {
   height: 60vh;
-  background-image: url("https://uploads-ssl.webflow.com/64584677a42c076b5ad19e3c/6460e6b9880c8d81f0bc4e68_Map%20Crypto%201.svg");
+  background-image: url("../images/map.png");
   background-position: 50%;
   background-size: cover;
 }
