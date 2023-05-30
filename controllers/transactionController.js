@@ -6,6 +6,7 @@ const Notification = require("../models/notificationModel");
 const Currency = require("../models/currencyModel");
 const Plan = require("../models/planModel");
 const Referral = require("../models/referralModel");
+const History = require("../models/historyModel");
 const Company = require("../models/companyModel");
 const AppError = require("../utils/appError");
 const User = require("../models/userModel");
@@ -439,9 +440,10 @@ const finishInterruptedActiveDeposit = async (
 };
 
 exports.approveDeposit = catchAsync(async (req, res, next) => {
-  req.body;
-  await Transaction.findByIdAndUpdate(req.params.id, { status: true });
+  await Transaction.findByIdAndDelete(req.params.id);
+  await History.create(req.body);
   startRunningDeposit(req.body, req.params.id, "edit", next);
+
   next();
 });
 

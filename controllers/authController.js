@@ -458,11 +458,14 @@ const createUserRecords = async (userData, res, msg) => {
   });
 
   const referral = await User.findOne({ username: user.referredBy });
+  console.log(referral);
   if (referral != null || referral != undefined) {
     const form = {
       username: user.username,
       regDate: user.regDate,
     };
+
+    console.log("There is referral");
 
     referral.referrals.push(form);
     await User.findByIdAndUpdate(referral._id, {
@@ -475,6 +478,8 @@ const createUserRecords = async (userData, res, msg) => {
       referralUsername: user.username,
       regDate: user.regDate,
     });
+
+    console.log("Referral Created");
 
     prepareEmail(referral, "referral-signup", user);
   }
