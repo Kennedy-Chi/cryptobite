@@ -5,6 +5,7 @@ const Related = require("../models/relatedModel");
 const Wallet = require("../models/walletModel");
 const Currency = require("../models/currencyModel");
 const History = require("../models/historyModel");
+const Referral = require("../models/referralModel");
 const Comment = require("../models/commentModel");
 const Transaction = require("../models/transactionModel");
 const Active = require("../models/activeModel");
@@ -168,6 +169,9 @@ exports.resetUsers = catchAsync(async (req, res, next) => {
   await Active.deleteMany();
   await Earning.deleteMany();
   await History.deleteMany();
+  await Referral.updateMany({
+    commission: 0,
+  });
 
   res.status(200).json({
     status: "success",

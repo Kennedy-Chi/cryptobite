@@ -215,6 +215,25 @@ exports.getTransactions = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getHistory = catchAsync(async (req, res, next) => {
+  const result = new APIFeatures(History.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields();
+
+  const resultLen = await result.query;
+
+  const features = result.paginate();
+
+  const transactions = await features.query.clone();
+
+  res.status(200).json({
+    status: "success",
+    data: transactions,
+    resultLength: resultLen.length,
+  });
+});
+
 exports.getActiveDeposits = catchAsync(async (req, res, next) => {
   const result = new APIFeatures(Active.find(), req.query)
     .filter()
