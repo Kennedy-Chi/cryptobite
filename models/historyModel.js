@@ -11,8 +11,12 @@ const historySchema = new mongoose.Schema({
   referredBy: String,
   walletId: String,
   time: Number,
-  reinvest: Boolean,
+  reinvest: {
+    type: Boolean,
+    default: false,
+  },
   image: String,
+  reinvest: Boolean,
   online: Boolean,
 });
 
