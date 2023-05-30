@@ -100,7 +100,7 @@ exports.createTransaction = catchAsync(async (req, res, next) => {
       data.reinvest = true;
       data.status = true;
       data.online = wallet.online;
-      await Transaction.create(data);
+      await History.create(data);
 
       data.planDuration = data.planDuration * 24 * 60 * 60 * 1000;
       data.daysRemaining = data.planDuration;
@@ -467,10 +467,9 @@ exports.approveDeposit = catchAsync(async (req, res, next) => {
 });
 
 exports.approveWithdrawal = catchAsync(async (req, res, next) => {
-  req.body.status = true;
-  const transaction = await Transaction.findByIdAndUpdate(req.params.id, {
-    status: true,
-  });
+  const transaction = await Transaction.findByIdAndDelete(req.params.id);
+
+  await History.create(req.body);
 
   const wallet = await Wallet.findById(transaction.walletId);
 
