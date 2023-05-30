@@ -42,7 +42,8 @@ exports.createTransaction = catchAsync(async (req, res, next) => {
     });
 
     data.status = true;
-    await Transaction.create(data);
+    data.reinvest = true;
+    await History.create(data);
     data.planDuration = data.planDuration * 24 * 60 * 60 * 1000;
     data.daysRemaining = data.planDuration * 1;
     data.serverTime = new Date().getTime();
@@ -128,6 +129,7 @@ exports.createTransaction = catchAsync(async (req, res, next) => {
 
       data.planDuration = duration;
       data.daysRemaining = duration;
+      data.reinvest = false;
       if (data.transactionType == "withdrawal") {
         if (data.amount > wallet.balance) {
           return next(
