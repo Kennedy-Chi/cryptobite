@@ -469,8 +469,8 @@ exports.approveDeposit = catchAsync(async (req, res, next) => {
 });
 
 exports.approveWithdrawal = catchAsync(async (req, res, next) => {
-  const transaction = await Transaction.findByIdAndDelete(req.params.id);
-
+  const transaction = await Transaction.findById(req.params.id);
+  await Transaction.findByIdAndDelete(req.params.id);
   await History.create(req.body);
 
   const wallet = await Wallet.findById(transaction.walletId);
