@@ -437,26 +437,28 @@ const finishInterruptedActiveDeposit = async (
     timeRemaining -= planCycle;
     await Earning.create(form);
 
-    await User.findByIdAndUpdate(user._id, {
-      $inc: { totalBalance: form.earning },
-    });
+    if (user != null || user != undefined) {
+      await User.findByIdAndUpdate(user._id, {
+        $inc: { totalBalance: form.earning },
+      });
 
-    await Wallet.findByIdAndUpdate(activeDeposit.walletId, {
-      $inc: {
-        balance: form.earning,
-      },
-    });
+      await Wallet.findByIdAndUpdate(activeDeposit.walletId, {
+        $inc: {
+          balance: form.earning,
+        },
+      });
 
-    const newActiveDeposit = await Active.findById(activeDeposit._id);
+      const newActiveDeposit = await Active.findById(activeDeposit._id);
 
-    startActiveDeposit(
-      newActiveDeposit,
-      earning,
-      timeRemaining,
-      newActiveDeposit.planCycle * 1,
-      user,
-      next
-    );
+      startActiveDeposit(
+        newActiveDeposit,
+        earning,
+        timeRemaining,
+        newActiveDeposit.planCycle * 1,
+        user,
+        next
+      );
+    }
   }, interval);
 };
 
