@@ -126,6 +126,7 @@ exports.createTransaction = catchAsync(async (req, res, next) => {
       );
     } else {
       const wallet = await Wallet.findById(data.walletId);
+      await Transaction.create(data);
 
       data.planDuration = data.planDuration * 24 * 60 * 60 * 1000;
       data.daysRemaining = data.planDuration;
@@ -161,7 +162,6 @@ exports.createTransaction = catchAsync(async (req, res, next) => {
         });
       } else {
         data.online = wallet.online;
-        await Transaction.create(data);
 
         await Wallet.findByIdAndUpdate(data.walletId, {
           $inc: { pendingDeposit: data.amount },
