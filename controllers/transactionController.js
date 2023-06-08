@@ -127,7 +127,7 @@ exports.createTransaction = catchAsync(async (req, res, next) => {
     } else {
       const wallet = await Wallet.findById(data.walletId);
 
-      data.planDuration = duration * 24 * 60 * 60 * 1000;
+      data.planDuration = data.planDuration * 24 * 60 * 60 * 1000;
       data.daysRemaining = data.planDuration;
       data.reinvest = false;
       if (data.transactionType == "withdrawal") {
