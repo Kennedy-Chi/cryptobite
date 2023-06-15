@@ -141,8 +141,6 @@ exports.createTransaction = catchAsync(async (req, res, next) => {
           );
         }
 
-        await Transaction.create(data);
-
         await Wallet.findByIdAndUpdate(data.walletId, {
           $inc: {
             pendingWithdrawal: data.amount,
@@ -297,9 +295,6 @@ const deleteActiveDeposit = async (id, time, next) => {
     await Wallet.findByIdAndUpdate(activeResult.walletId, {
       $inc: {
         balance: activeResult.amount,
-      },
-
-      $inc: {
         amountDeposited: activeResult.amount * -1,
       },
     });
