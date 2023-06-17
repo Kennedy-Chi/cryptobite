@@ -702,10 +702,10 @@ const startRunningDeposit = async (data, id, next) => {
 
   const earning = Number((data.amount * data.percent) / 100).toFixed(2);
 
-  const planDuration = 4 * 60 * 1000;
-  const planCycle = 60 * 1000;
-  // const planDuration = data.planDuration * 24 * 60 * 60 * 1000;
-  // const planCycle = data.planCycle * 1;
+  // const planDuration = 4 * 60 * 1000;
+  // const planCycle = 60 * 1000;
+  const planDuration = data.planDuration * 24 * 60 * 60 * 1000;
+  const planCycle = data.planCycle * 1;
 
   const form = {
     planDuration: planDuration,
