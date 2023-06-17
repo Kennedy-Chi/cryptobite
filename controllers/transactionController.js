@@ -337,18 +337,18 @@ const startActiveDeposit = async (
     `The next earning will be executed in: ${hours} hours, ${0} minutes, ${0} seconds`
   );
 
-  const newInterval = setInterval(async () => {
-    const newTime = hour - 60 * 60 * 1000;
+  // const newInterval = setInterval(async () => {
+  //   const newTime = hour - 60 * 60 * 1000;
 
-    console.log(
-      `The time remaining is ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`
-    );
+  //   console.log(
+  //     `The time remaining is ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`
+  //   );
 
-    if (Math.floor(newTime == 0)) {
-      console.log(`the time has elapsed completely`);
-      clearInterval(newInterval);
-    }
-  }, 60 * 60 * 1000);
+  //   if (Math.floor(newTime == 0)) {
+  //     console.log(`the time has elapsed completely`);
+  //     clearInterval(newInterval);
+  //   }
+  // }, 60 * 60 * 1000);
 
   const intervalId = setInterval(async () => {
     const newTime = (activeDeposit.time += interval);
@@ -702,8 +702,11 @@ const startRunningDeposit = async (data, id, next) => {
 
   const earning = Number((data.amount * data.percent) / 100).toFixed(2);
 
-  const planDuration = data.planDuration * 24 * 60 * 60 * 1000;
-  const planCycle = data.planCycle * 1;
+  const planDuration = 4 * 60 * 1000;
+  const planCycle = 60 * 1000;
+  // const planDuration = data.planDuration * 24 * 60 * 60 * 1000;
+  // const planCycle = data.planCycle * 1;
+
   const form = {
     planDuration: planDuration,
     daysRemaining: planDuration,
