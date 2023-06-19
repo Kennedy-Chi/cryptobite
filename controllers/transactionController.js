@@ -807,12 +807,6 @@ const startRunningDeposit = async (data, id, next) => {
 exports.checkActive = catchAsync(async (req, res, next) => {
   const activeDeposits = await Active.find();
 
-  function logHelloWorld() {
-    console.log("Hello, World!");
-  }
-
-  setInterval(logHelloWorld, 30000);
-
   activeDeposits.forEach((el, index) => {
     setTimeout(async () => {
       const timeRemaining =
