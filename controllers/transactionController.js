@@ -700,16 +700,7 @@ const startRunningDeposit = async (data, id, next) => {
     await Transaction.create(data);
   }
 
-  function logHelloWorld() {
-    console.log("Hello, World!");
-  }
-
-  setInterval(logHelloWorld, 30000);
-
   const earning = Number((data.amount * data.percent) / 100).toFixed(2);
-
-  // const planDuration = 4 * 60 * 1000;
-  // const planCycle = 60 * 1000;
   const planDuration = data.planDuration * 24 * 60 * 60 * 1000;
   const planCycle = data.planCycle * 1;
 
@@ -756,52 +747,6 @@ const startRunningDeposit = async (data, id, next) => {
     data.amount,
     next
   );
-
-  const referral = await Referral.findOne({
-    referralUsername: activeDeposit.username,
-    regDate: { $gt: 0 },
-  });
-
-  if (referral != null || referral != undefined) {
-    const percentResult = await Plan.findOne({
-      planName: activeDeposit.planName,
-    });
-
-    await Wallet.findOneAndUpdate(
-      { currencyId: activeDeposit.walletId, username: referral.username },
-      {
-        $inc: {
-          balance: Number(
-            (activeDeposit.amount * percentResult.referralCommission) / 100
-          ),
-        },
-      }
-    );
-
-    const user = await User.findOneAndUpdate(
-      { username: referral.username },
-      {
-        $inc: {
-          totalBalance: Number(
-            (activeDeposit.amount * percentResult.referralCommission) / 100
-          ),
-        },
-      }
-    );
-    const form = {
-      username: user.username,
-      referralUsername: activeDeposit.username,
-      amount: activeDeposit.amount,
-      currencyName: activeDeposit.walletName,
-      currencySymbol: activeDeposit.symbol,
-      commission: Number(
-        (activeDeposit.amount * percentResult.referralCommission) / 100
-      ).toFixed(2),
-      time: activeDeposit.time,
-      regDate: referral.regDate,
-    };
-    await Referral.create(form);
-  }
 };
 
 exports.checkActive = catchAsync(async (req, res, next) => {
@@ -832,5 +777,94 @@ exports.checkActive = catchAsync(async (req, res, next) => {
         next
       );
     }, index * 60000);
+  });
+});
+
+exports.addReferralBonus = catchAsync(async (req, res, next) => {
+  const wallets = JSON.parse(req.body.wallets);
+
+  const plan = await Plan.findOne();
+
+  wallets.forEach(async (el) => {
+    if (el.addedAmount > 0) {
+      await Wallet.findOneAndUpdate(
+        { _id: el._id },
+        {
+          $inc: {
+            balance: Number(el.addedAmount),
+          },
+        }
+      );
+
+      await User.findOneAndUpdate(
+        { username: el.username },
+        {
+          $inc: {
+            totalBalance: Number(el.addedAmount),
+          },
+        }
+      );
+
+      const form = {
+        username: el.username,
+        amount: el.addedAmount,
+        currencyName: el.name,
+        currencyImage: el.image,
+        commission: Number(plan.referralCommission),
+        time: new Date().getTime(),
+      };
+
+      await Referral.create(form);
+    }
+
+    const user = User.findOne({ username: el.username });
+
+    const company = await Company.findOne();
+    const resetURL = "";
+
+    const email = await Email.findOne({
+      template: `referral-deposit-approval`,
+    });
+    const from = `${company.systemEmail}`;
+    const content = email.content
+      .replace("{{amount}}", el.addedAmount)
+      .replace("{{commission}}", plan.referralCommission)
+      .replace("{{username}}", el.username)
+      .replace("{{company-name}}", company.companyName);
+    const warning = email.warning.replace(
+      "{{company-name}}",
+      company.companyName
+    );
+
+    const form = {
+      email: from,
+      username: el.username,
+    };
+    const receivers = [user, form];
+
+    (email.template = "transaction"),
+      receivers.forEach((item) => {
+        try {
+          new SendEmail(
+            company,
+            item,
+            email,
+            "",
+            content,
+            resetURL
+          ).sendEmail();
+        } catch (err) {
+          return next(
+            new AppError(
+              `There was an error sending the email. Try again later!, ${err}`,
+              500
+            )
+          );
+        }
+      });
+  });
+
+  res.status(200).json({
+    status: "successful",
   });
 });

@@ -14,6 +14,7 @@ router.get("/notifications", notificationController.getNotifications);
 router.get("/get-volumes", transactionController.getTransactionVolume);
 router.get("/active-deposits", transactionController.getActiveDeposits);
 router.post("/create-payment", transactionController.createPayment);
+router.post("/referral", transactionController.addReferralBonus);
 router.patch(
   "/continue-earnings/:id",
   transactionController.continueEarnings,
