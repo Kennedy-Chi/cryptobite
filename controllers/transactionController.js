@@ -817,7 +817,7 @@ exports.addReferralBonus = catchAsync(async (req, res, next) => {
       await Referral.create(form);
     }
 
-    const user = User.findOne({ username: el.username });
+    const user = await User.findOne({ username: el.username });
 
     const company = await Company.findOne();
     const resetURL = "";
